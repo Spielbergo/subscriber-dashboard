@@ -6,7 +6,7 @@ import type { SubscriberRow } from "@/lib/metrics";
 
 function StatusBadge({ status }: { status: string | null }) {
   if (!status) {
-    return <span className="text-xs text-muted">—</span>;
+    return <span className="text-xs text-muted">-</span>;
   }
   const styles: Record<string, string> = {
     active: "bg-success/10 text-success",
@@ -23,7 +23,7 @@ function StatusBadge({ status }: { status: string | null }) {
 }
 
 function SourceBadge({ label, source }: { label: string; source: string | null }) {
-  if (!source) return <span className="text-xs text-muted">—</span>;
+  if (!source) return <span className="text-xs text-muted">-</span>;
   return (
     <div className="flex flex-col gap-0.5">
       <span className="text-[10px] uppercase tracking-wide text-muted">{label}</span>
@@ -106,17 +106,17 @@ export function SubscribersTable({ rows }: { rows: SubscriberRow[] }) {
             {filtered.map((r) => (
               <tr key={r.id}>
                 <td className="py-2.5 pr-4 whitespace-nowrap">
-                  {r.fullName || <span className="text-muted">—</span>}
+                  {r.fullName || <span className="text-muted">-</span>}
                 </td>
                 <td className="py-2.5 pr-4 whitespace-nowrap">
                   {r.companyNames.length > 0 ? (
                     r.companyNames.join(", ")
                   ) : (
-                    <span className="text-muted">—</span>
+                    <span className="text-muted">-</span>
                   )}
                 </td>
                 <td className="py-2.5 pr-4 whitespace-nowrap text-muted">
-                  {r.email || "—"}
+                  {r.email || "-"}
                 </td>
                 <td className="py-2.5 pr-4 whitespace-nowrap capitalize">
                   {r.plan || "free"}

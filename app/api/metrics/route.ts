@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // Validate the token with the publishable key — this just asks Supabase
+  // Validate the token with the publishable key - this just asks Supabase
   // "who does this access token belong to", it doesn't touch cookies.
   const authClient = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
     return NextResponse.json(
       {
         error: "Failed to load metrics",
-        // Only useful for local debugging — remove detail before deploying publicly.
+        // Only useful for local debugging - remove detail before deploying publicly.
         detail: process.env.NODE_ENV !== "production" ? message : undefined,
       },
       { status: 500 }

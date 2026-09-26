@@ -108,7 +108,7 @@ export function DashboardShell({ initial }: { initial: Metrics }) {
         <StatCard
           label="Cancellations (30d)"
           value={String(metrics.cancellations.last30Days)}
-          sub="Approximate — no cancel timestamp in DB"
+          sub="Approximate - no cancel timestamp in DB"
           icon={TrendingDown}
         />
         <StatCard

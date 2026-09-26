@@ -30,7 +30,7 @@ export async function fetchMetricsClient(): Promise<Metrics> {
       const body = await res.json();
       detail = body?.detail ?? body?.error ?? "";
     } catch {
-      // response wasn't JSON — ignore
+      // response wasn't JSON - ignore
     }
     throw new Error(detail ? `Failed to load metrics: ${detail}` : "Failed to load metrics");
   }

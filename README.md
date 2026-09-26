@@ -3,7 +3,7 @@
 Internal, admin-only dashboard for tracking subscriber/subscription
 activity in your bookkeeping app. Reads from the **same Supabase
 project** as your main app but never surfaces personal data (no emails,
-names, or company names) — only counts, plans, statuses, and masked IDs.
+names, or company names) - only counts, plans, statuses, and masked IDs.
 
 ## Setup
 
@@ -21,15 +21,15 @@ names, or company names) — only counts, plans, statuses, and masked IDs.
    cp .env.example .env.local
    ```
 
-   - `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` —
+   - `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` -
      from Supabase Dashboard → Project Settings → API Keys. The
      publishable key is the modern, safe-for-the-browser replacement for
      the old "anon" key.
-   - `SUPABASE_SECRET_KEY` — same page, under "Secret keys". The modern
+   - `SUPABASE_SECRET_KEY` - same page, under "Secret keys". The modern
      replacement for the old "service_role" key. **Never** prefix this
      with `NEXT_PUBLIC_` and never commit it. Used server-side only, to
      read subscription metrics regardless of the main app's RLS policies.
-   - `ALLOWED_ADMIN_EMAILS` — comma-separated list of emails allowed to
+   - `ALLOWED_ADMIN_EMAILS` - comma-separated list of emails allowed to
      use this dashboard. Must match an existing account in this
      Supabase project's `auth.users` (e.g. your own account from signing
      up on the main app).
@@ -44,7 +44,7 @@ names, or company names) — only counts, plans, statuses, and masked IDs.
 
 ## How auth works here (and why)
 
-This dashboard uses **client-side Supabase Auth only** — no cookies, no
+This dashboard uses **client-side Supabase Auth only** - no cookies, no
 middleware, no SSR session syncing:
 
 - Login happens in the browser; Supabase stores the session in
@@ -59,19 +59,19 @@ middleware, no SSR session syncing:
 This is a deliberate simplification for a single-admin, locally-run
 tool: cookie-based SSR auth (the original approach) is more robust for
 multi-page public sites, but it's also the thing that caused the `431
-Request Header Fields Too Large` error during setup — cookie chunking
+Request Header Fields Too Large` error during setup - cookie chunking
 and redirect loops are a known sharp edge with that pattern. Token-based
 auth sidesteps it entirely. If you later add teammates or move to a
 setup where server-rendered pages need to know who's logged in without
 a client round-trip, cookie-based auth (via `@supabase/ssr`) is the
-right tool then — just budget time to get the cookie handling exactly
+right tool then - just budget time to get the cookie handling exactly
 right.
 
 ## Deploying to Vercel later
 
 - Add the same four environment variables in Vercel's project settings.
 - Double-check `SUPABASE_SECRET_KEY` is added as a regular (non-public)
-  environment variable — Vercel keeps these server-side only, same as
+  environment variable - Vercel keeps these server-side only, same as
   locally.
 - Nothing else changes; this is a standard Next.js App Router project.
 

@@ -153,7 +153,7 @@ function buildSubscriberSeries(
 export async function getMetrics(): Promise<Metrics> {
   const supabase = createSupabaseAdminClient();
 
-  // Personal columns (email, full_name, company name) are now included —
+  // Personal columns (email, full_name, company name) are now included -
   // this is an internal, admin-only view of your own product's users,
   // not a public surface.
   const [profilesRes, subsRes, companiesRes] = await Promise.all([
